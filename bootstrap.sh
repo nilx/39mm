@@ -13,6 +13,6 @@ sudo apt-get install --quiet --yes --no-install-recommends git chef
 # get 39mm recipes
 git clone https://github.com/nilx/39mm.git
 # run 39mm recipes
-cd admin/chef
+cd 39mm/chef
 ./setup.sh
 #reboot

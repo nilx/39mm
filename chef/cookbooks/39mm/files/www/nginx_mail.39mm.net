@@ -1,0 +1,34 @@
+
+server {
+	listen 80;
+	# listen [::]:80;
+	server_name mail.39mm.net mailx.39mm.net;
+
+	root /srv/www/mail.39mm.net;
+
+        access_log /var/log/nginx/access_mail.39mm.net.log;
+
+        index index.txt;
+        location /.well-known/acme-challenge {
+                alias /var/lib/dehydrated/acme-challenges;
+        }
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}
+server {
+	listen 443 ssl;
+	# listen [::]443;
+        ssl_certificate     /var/lib/dehydrated/certs/mail.39mm.net/fullchain.pem;
+        ssl_certificate_key /var/lib/dehydrated/certs/mail.39mm.net/privkey.pem;
+	server_name mail.39mm.net mailx.39mm.net;
+
+	root /srv/www/mail.39mm.net;
+
+        access_log /var/log/nginx/access_mail.39mm.net.log;
+
+        index index.txt;
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}
